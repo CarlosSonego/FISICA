@@ -5,13 +5,13 @@ import java.awt.event.ActionListener;
 
 public class CalculadoraVelocidadeMedia extends JFrame {
 
-    private JLabel labelTitulo;
-    private JComboBox<String> comboOperacoes;
-    private JLabel labelRepeticoes;
-    private JTextField campoRepeticoes;
-    private JButton botaoIniciar;
-    private int contadorRepeticoes = 0;
-    private int totalRepeticoes = 0;
+    private JLabel titulo;
+    private JComboBox<String> copr;
+    private JLabel rpt;
+    private JTextField crpt;
+    private JButton ini;
+    private int cntrpt = 0;
+    private int trpt = 0;
     private double[] vetorKm;
     private double[] vetorHoras;
 
@@ -21,58 +21,58 @@ public class CalculadoraVelocidadeMedia extends JFrame {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setLocationRelativeTo(null);
 
-        JPanel painelPrincipal = new JPanel();
-            painelPrincipal.setLayout(new BoxLayout(painelPrincipal, BoxLayout.Y_AXIS));
-                getContentPane().add(painelPrincipal);
+        JPanel pp = new JPanel();
+            pp.setLayout(new BoxLayout(pp, BoxLayout.Y_AXIS));
+                getContentPane().add(pp);
 
-        labelTitulo = new JLabel("Escolha a operação e número de repetições:");
-        labelTitulo.setFont(new Font("Arial", Font.BOLD, 14));
-        labelTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-            painelPrincipal.add(labelTitulo);
+        titulo = new JLabel("Escolha a operação e número de repetições:");
+        titulo.setFont(new Font("Arial", Font.BOLD, 14));
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+            pp.add(titulo);
 
-        JPanel painelOperacoes = new JPanel();
+        JPanel po = new JPanel();
 
-            painelOperacoes.setLayout(new FlowLayout(FlowLayout.CENTER));
-            comboOperacoes = new JComboBox<>(new String[]{"Velocidade Média"});
-            comboOperacoes.setAlignmentX(Component.CENTER_ALIGNMENT);
-            painelOperacoes.add(comboOperacoes);
-            painelPrincipal.add(painelOperacoes);
+            po.setLayout(new FlowLayout(FlowLayout.CENTER));
+            copr = new JComboBox<>(new String[]{"Velocidade Média"});
+            copr.setAlignmentX(Component.CENTER_ALIGNMENT);
+            po.add(copr);
+            pp.add(po);
 
-        JPanel painelRepeticoes = new JPanel();
+        JPanel pr = new JPanel();
 
-            painelRepeticoes.setLayout(new FlowLayout(FlowLayout.CENTER));
-            labelRepeticoes = new JLabel("Número de repetições:");
-            labelRepeticoes.setAlignmentX(Component.CENTER_ALIGNMENT);
-            painelRepeticoes.add(labelRepeticoes);
-            campoRepeticoes = new JTextField(10);
-            campoRepeticoes.setAlignmentX(Component.CENTER_ALIGNMENT);
-            painelRepeticoes.add(campoRepeticoes);
-            painelPrincipal.add(painelRepeticoes);
+            pr.setLayout(new FlowLayout(FlowLayout.CENTER));
+            rpt = new JLabel("Número de repetições:");
+            rpt.setAlignmentX(Component.CENTER_ALIGNMENT);
+            pr.add(rpt);
+            crpt = new JTextField(10);
+            crpt.setAlignmentX(Component.CENTER_ALIGNMENT);
+            pr.add(crpt);
+            pp.add(pr);
 
-        botaoIniciar = new JButton("Iniciar");
-        botaoIniciar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botaoIniciar.addActionListener(new ActionListener() {
+        ini = new JButton("Iniciar");
+        ini.setAlignmentX(Component.CENTER_ALIGNMENT);
+        ini.addActionListener(new ActionListener() {
 
     @Override
         public void actionPerformed(ActionEvent e) {
             iniciarOperacoes();
 }
 });
-        painelPrincipal.add(botaoIniciar);
+        pp.add(ini);
             setVisible(true);
     }
 
     private void iniciarOperacoes() {
         try {
-            String operacaoSelecionada = (String) comboOperacoes.getSelectedItem();
-            totalRepeticoes = Integer.parseInt(campoRepeticoes.getText());
+            String os = (String) copr.getSelectedItem();
+            trpt = Integer.parseInt(crpt.getText());
 
-            if (totalRepeticoes > 0) {
-                contadorRepeticoes = 0;
+            if (trpt > 0) {
+                cntrpt = 0;
 
-                vetorKm = new double[totalRepeticoes];
-                vetorHoras = new double[totalRepeticoes];
-                realizarOperacao(operacaoSelecionada);
+                vetorKm = new double[trpt];
+                vetorHoras = new double[trpt];
+                realizarOperacao(os);
             } else {
                 JOptionPane.showMessageDialog(this, "Número deve ser maior que zero.");
             }
@@ -82,70 +82,70 @@ public class CalculadoraVelocidadeMedia extends JFrame {
     }
 
     private void realizarOperacao(String operacao) {
-        contadorRepeticoes++;
+        cntrpt++;
 
-        JFrame janelaOperacao = new JFrame("Operação " + contadorRepeticoes + "/" + totalRepeticoes);
-        janelaOperacao.setSize(400, 300);
-        janelaOperacao.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janelaOperacao.setLocationRelativeTo(null);
+        JFrame jo = new JFrame("Operação " + cntrpt + "/" + trpt);
+        jo.setSize(400, 300);
+        jo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jo.setLocationRelativeTo(null);
 
-        JPanel painelOperacao = new JPanel();
-        painelOperacao.setLayout(new BoxLayout(painelOperacao, BoxLayout.Y_AXIS));
-        janelaOperacao.getContentPane().add(painelOperacao);
+        JPanel po = new JPanel();
+        po.setLayout(new BoxLayout(po, BoxLayout.Y_AXIS));
+        jo.getContentPane().add(po);
 
-        JLabel labelOperacao = new JLabel("Operação " + contadorRepeticoes + "/" + totalRepeticoes + ": " + operacao);
-        labelOperacao.setFont(new Font("Arial", Font.BOLD, 16));
-        labelOperacao.setAlignmentX(Component.CENTER_ALIGNMENT);
-        painelOperacao.add(labelOperacao);
+        JLabel op = new JLabel("Operação " + cntrpt + "/" + trpt + ": " + operacao);
+        op.setFont(new Font("Arial", Font.BOLD, 16));
+        op.setAlignmentX(Component.CENTER_ALIGNMENT);
+        po.add(op);
 
-        JPanel painelCampos = new JPanel();
-        painelCampos.setLayout(new GridLayout(4, 2, 10, 10));
-        painelCampos.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        painelOperacao.add(painelCampos);
+        JPanel cmp = new JPanel();
+        cmp.setLayout(new GridLayout(4, 2, 10, 10));
+        cmp.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        po.add(cmp);
 
         JLabel labelKm = new JLabel("Km percorridos:");
-        JTextField campoKm = new JTextField(10);
-        campoKm.setAlignmentX(Component.CENTER_ALIGNMENT);
-        painelCampos.add(labelKm);
-        painelCampos.add(campoKm);
+        JTextField ckm = new JTextField(10);
+        ckm.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cmp.add(labelKm);
+        cmp.add(ckm);
 
-        JLabel labelHoras = new JLabel("Horas:");
-        JTextField campoHoras = new JTextField(10);
-        campoHoras.setAlignmentX(Component.CENTER_ALIGNMENT);
-        painelCampos.add(labelHoras);
-        painelCampos.add(campoHoras);
+        JLabel hrs = new JLabel("Horas:");
+        JTextField chrs = new JTextField(10);
+        chrs.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cmp.add(hrs);
+        cmp.add(chrs);
 
-        JLabel labelVelocidadeMedia = new JLabel("Velocidade Média:");
-        JTextField campoVelocidadeMedia = new JTextField(10);
-        campoVelocidadeMedia.setEditable(false); 
-        campoVelocidadeMedia.setAlignmentX(Component.CENTER_ALIGNMENT);
-        painelCampos.add(labelVelocidadeMedia);
-        painelCampos.add(campoVelocidadeMedia);
+        JLabel vm = new JLabel("Velocidade Média:");
+        JTextField cvm = new JTextField(10);
+        cvm.setEditable(false); 
+        cvm.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cmp.add(vm);
+        cmp.add(cvm);
 
-        JButton botaoVerResultado = new JButton("Resultado");
-        botaoVerResultado.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botaoVerResultado.addActionListener(new ActionListener() {
+        JButton resultado = new JButton("Resultado");
+        resultado.setAlignmentX(Component.CENTER_ALIGNMENT);
+        resultado.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                calcularOperacao(operacao, campoKm, campoHoras, campoVelocidadeMedia);
+                calcularOperacao(operacao, ckm, chrs, cvm);
 
                 try {
-                    vetorKm[contadorRepeticoes - 1] = Double.parseDouble(campoKm.getText());
-                    vetorHoras[contadorRepeticoes - 1] = Double.parseDouble(campoHoras.getText());
+                    vetorKm[cntrpt - 1] = Double.parseDouble(ckm.getText());
+                    vetorHoras[cntrpt - 1] = Double.parseDouble(chrs.getText());
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "insira valores válidos para Km e Horas.");
                     return;
                 }
 
-                painelCampos.revalidate();
-                painelCampos.repaint();
+                cmp.revalidate();
+                cmp.repaint();
 
                 Timer timer = new Timer(2000, new ActionListener() {
 
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        janelaOperacao.dispose(); 
-                        if (contadorRepeticoes < totalRepeticoes) {
+                        jo.dispose(); 
+                        if (cntrpt < trpt) {
                             realizarOperacao(operacao); 
                         } else {
                             mostrarResultadosAnteriores();
@@ -156,56 +156,56 @@ public class CalculadoraVelocidadeMedia extends JFrame {
                 timer.start();
             }
         });
-        painelCampos.add(botaoVerResultado);
+        cmp.add(resultado);
 
-        janelaOperacao.setVisible(true);
+        jo.setVisible(true);
     }
 
     private void mostrarResultadosAnteriores() {
 
-        JFrame janelaResultados = new JFrame("Resultados Anteriores e Velocidade Média Total");
-        janelaResultados.setSize(400, 300);
-        janelaResultados.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janelaResultados.setLocationRelativeTo(null);
+        JFrame resultados = new JFrame("Resultados Anteriores e Velocidade Média Total");
+        resultados.setSize(400, 300);
+        resultados.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        resultados.setLocationRelativeTo(null);
 
-        JPanel painelPrincipal = new JPanel();
-        painelPrincipal.setLayout(new BoxLayout(painelPrincipal, BoxLayout.Y_AXIS));
-        janelaResultados.getContentPane().add(painelPrincipal);
+        JPanel pp = new JPanel();
+        pp.setLayout(new BoxLayout(pp, BoxLayout.Y_AXIS));
+        resultados.getContentPane().add(pp);
 
-        JLabel labelTitulo = new JLabel("Resultados Anteriores e Velocidade Média Total");
-        labelTitulo.setFont(new Font("Arial", Font.BOLD, 16));
-        labelTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        painelPrincipal.add(labelTitulo);
+        JLabel titulo = new JLabel("Resultados Anteriores e Velocidade Média Total");
+        titulo.setFont(new Font("Arial", Font.BOLD, 16));
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        pp.add(titulo);
 
-        JPanel painelResultados = new JPanel();
-        painelResultados.setLayout(new BoxLayout(painelResultados, BoxLayout.Y_AXIS));
-        painelResultados.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        painelPrincipal.add(painelResultados);
+        JPanel presultados = new JPanel();
+        presultados.setLayout(new BoxLayout(presultados, BoxLayout.Y_AXIS));
+        presultados.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        pp.add(presultados);
 
-        for (int i = 0; i < totalRepeticoes; i++) {
+        for (int i = 0; i < trpt; i++) {
             JLabel labelResultado = new JLabel("Operação " + (i + 1) + ": " +
                     "Velocidade Média = " + String.format("%.2f", vetorKm[i] / vetorHoras[i]));
             labelResultado.setAlignmentX(Component.CENTER_ALIGNMENT);
-            painelResultados.add(labelResultado);
+            presultados.add(labelResultado);
 
-            painelResultados.add(Box.createRigidArea(new Dimension(0, 10)));
-            painelResultados.add(new JSeparator(SwingConstants.HORIZONTAL));
-            painelResultados.add(Box.createRigidArea(new Dimension(0, 10)));
+            presultados.add(Box.createRigidArea(new Dimension(0, 10)));
+            presultados.add(new JSeparator(SwingConstants.HORIZONTAL));
+            presultados.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
 double somaKm = 0;
 double somaHoras = 0;
 
-for (int i = 0; i < totalRepeticoes; i++) {
+for (int i = 0; i < trpt; i++) {
     somaKm += vetorKm[i];
     somaHoras += vetorHoras[i];
 }
 
 double velocidadeMediaTotal = somaKm / somaHoras;
-JLabel labelVelocidadeMediaTotal = new JLabel("Velocidade Média Total: " + String.format("%.2f", velocidadeMediaTotal));
-labelVelocidadeMediaTotal.setFont(new Font("Arial", Font.BOLD, 14));
-labelVelocidadeMediaTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
-painelPrincipal.add(labelVelocidadeMediaTotal);
+JLabel vmTotal = new JLabel("Velocidade Média Total: " + String.format("%.2f", velocidadeMediaTotal));
+vmTotal.setFont(new Font("Arial", Font.BOLD, 14));
+vmTotal.setAlignmentX(Component.CENTER_ALIGNMENT);
+pp.add(vmTotal);
 
 JButton botaoReiniciar = new JButton("Reiniciar Programa");
 botaoReiniciar.addActionListener(new ActionListener() {
@@ -216,22 +216,22 @@ botaoReiniciar.addActionListener(new ActionListener() {
     }
 });
 
-JPanel painelBotao = new JPanel();
-painelBotao.setLayout(new FlowLayout(FlowLayout.CENTER));
-painelBotao.add(botaoReiniciar);
-painelPrincipal.add(painelBotao);
+JPanel bt = new JPanel();
+bt.setLayout(new FlowLayout(FlowLayout.CENTER));
+bt.add(botaoReiniciar);
+pp.add(bt);
 
-janelaResultados.setVisible(true);
+resultados.setVisible(true);
 }
 
 private void reiniciarPrograma() {
 
     vetorKm = null;
 vetorHoras = null;
-contadorRepeticoes = 0;
-totalRepeticoes = 0;
-campoRepeticoes.setText("");
-comboOperacoes.setSelectedIndex(0);
+cntrpt = 0;
+trpt = 0;
+crpt.setText("");
+copr.setSelectedIndex(0);
 
 Window[] windows = Window.getWindows();
 
@@ -239,26 +239,26 @@ for (Window window : windows) {
     
 if (window instanceof JFrame) {
 JFrame frame = (JFrame) window;
-if (frame.getTitle().equals("Resultados Anteriores e Velocidade Média Total")) {
+if (frame.getTitle().equals("Resultados Anteriores/Velocidade Média Total")) {
     frame.dispose();
-}
-}
-}
+}   
+    }
+        }
 
 dispose();
 
 new CalculadoraVelocidadeMedia();
 }
 
-private void calcularOperacao(String operacao, JTextField campoKm, JTextField campoHoras, JTextField campoVelocidadeMedia) {
-double km = Double.parseDouble(campoKm.getText());
-double horas = Double.parseDouble(campoHoras.getText());
+private void calcularOperacao(String operacao, JTextField ckm, JTextField chrs, JTextField cvm) {
+double km = Double.parseDouble(ckm.getText());
+double horas = Double.parseDouble(chrs.getText());
 
 switch (operacao) {
 case "Velocidade Média":
 
 double velocidadeMedia = km / horas;
-campoVelocidadeMedia.setText(String.format("%.2f", velocidadeMedia));
+cvm.setText(String.format("%.2f", velocidadeMedia));
 break;
 
 default:
